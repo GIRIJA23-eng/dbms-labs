@@ -1,4 +1,4 @@
-USE girija;
+USE taxpayers;
 SHOW tables;
 SELECT * FROM taxpayer;
 SELECT * FROM income_category;
