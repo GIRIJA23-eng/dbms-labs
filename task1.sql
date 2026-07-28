@@ -1,5 +1,5 @@
-//CREATE DATABASE girija;
-USE girija;
+//CREATE DATABASE taxpayers;
+USE taxpayers;
 CREATE TABLE taxpayer(
 taxpayer_id INT PRIMARY KEY,pan_number VARCHAR(10) NOT NULL UNIQUE,
 full_name VARCHAR(50) NOT NULL,date_of_birth DATE NOT NULL,
