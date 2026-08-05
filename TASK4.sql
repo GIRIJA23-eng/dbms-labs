@@ -1,4 +1,4 @@
-use girija;
+use taxpayers;
 show tables;
 select t.full_name, i.income_source from taxpayer t 
 inner join Income_Record i on t.taxpayer_id=i.taxpayer_id;
