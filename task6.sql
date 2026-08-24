@@ -1,4 +1,4 @@
-use girija;
+use taxpayers;
 show tables;
 select * from income_record
 where amount=(
