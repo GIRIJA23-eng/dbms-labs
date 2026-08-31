@@ -1,4 +1,4 @@
-use girija;
+use taxpayers;
 create view highest_income_view as
 select * from income_record
 where amount=(
