@@ -1,4 +1,4 @@
-USE girija;
+USE taxpayers;
 SHOW TABLES;
 SELECT * FROM Taxpayer;
 SELECT * FROM Income_Category;
@@ -102,11 +102,11 @@ CREATE USER 'tax_clerk1'@'localhost'
 IDENTIFIED BY 'Tax@123';
 SHOW GRANTS FOR 'tax_clerk1'@'localhost';
 SELECT CURRENT_USER();
-GRANT SELECT ON girija.Taxpayer TO 'tax_clerk1'@'localhost';
+GRANT SELECT ON taxpayers.Taxpayer TO 'tax_clerk1'@'localhost';
 SHOW GRANTS FOR 'tax_clerk1'@'localhost';
 SELECT *
 FROM Taxpayer; 
-GRANT INSERT ON girija.Income_Record TO 'tax_clerk1'@'localhost';
+GRANT INSERT ON taxpayers.Income_Record TO 'tax_clerk1'@'localhost';
 SHOW GRANTS FOR 'tax_clerk1'@'localhost';
 INSERT INTO Income_Record
 (income_id, taxpayer_id, income_source, amount, received_date, remarks, category_id, year_id)
@@ -122,11 +122,11 @@ JOIN Income_Record ir ON t.taxpayer_id = ir.taxpayer_id
 JOIN Income_Category ic ON ir.category_id = ic.category_id
 JOIN Financial_Year fy ON ir.year_id = fy.year_id;
 SHOW FULL TABLES WHERE Table_type = 'VIEW';
-GRANT SELECT ON girija.Taxpayer_Income_Summary TO 'tax_clerk1'@'localhost';
+GRANT SELECT ON taxpayers.Taxpayer_Income_Summary TO 'tax_clerk1'@'localhost';
 SHOW GRANTS FOR 'tax_clerk1'@'localhost';
 SELECT * FROM Taxpayer_Income_Summary;
 CREATE USER 'tax_data_entry'@'localhost' IDENTIFIED BY 'Entry@123';
-GRANT SELECT, INSERT ON girija.Income_Record TO 'tax_data_entry'@'localhost';
+GRANT SELECT, INSERT ON taxpayers.Income_Record TO 'tax_data_entry'@'localhost';
 SHOW GRANTS FOR 'tax_data_entry'@'localhost';
 SELECT CURRENT_USER();
 SELECT * FROM Income_Record;
@@ -137,7 +137,7 @@ VALUES
 '2026-03-31', 'Entry Test', 5, 6);
 CREATE USER 'tax_officer'@'localhost'
 IDENTIFIED BY 'Officer@123';
-GRANT SELECT, INSERT, UPDATE ON girija.Income_Record TO 'tax_officer'@'localhost';
+GRANT SELECT, INSERT, UPDATE ON taxpayers.Income_Record TO 'tax_officer'@'localhost';
 SHOW GRANTS FOR 'tax_officer'@'localhost';
 INSERT INTO Income_Record
 (income_id, taxpayer_id, income_source, amount, received_date, remarks, category_id, year_id)
@@ -145,19 +145,19 @@ VALUES
 (1016, 102, 'Officer Test Income', 65000.00,
 '2026-03-31', 'Officer Insert Test', 5, 6);
 UPDATE Income_Record SET amount = 70000.00 WHERE income_id = 1016;
-GRANT SELECT ON girija.Taxpayer_Income_Summary TO 'tax_officer'@'localhost';
+GRANT SELECT ON taxpayers.Taxpayer_Income_Summary TO 'tax_officer'@'localhost';
 SHOW GRANTS FOR 'tax_officer'@'localhost';
 SELECT * FROM Taxpayer_Income_Summary;
 GRANT SELECT, INSERT, UPDATE ON girija.Income_Record TO 'tax_officer'@'localhost';
 SHOW GRANTS FOR 'tax_officer'@'localhost';
-REVOKE UPDATE ON girija.Income_Record FROM 'tax_officer'@'localhost';
+REVOKE UPDATE ON taxpayers.Income_Record FROM 'tax_officer'@'localhost';
 SHOW GRANTS FOR 'tax_officer'@'localhost';
 SELECT * FROM Income_Record;
 INSERT INTO Income_Record
 (income_id, taxpayer_id, income_source, amount, received_date, remarks, category_id, year_id)
 VALUES
 (1017, 103, 'Task 4 Test', 45000.00,'2026-03-31', 'Task 4 Insert', 5, 6);
-GRANT SELECT ON girija.Taxpayer_Income_Summary TO 'tax_data_entry'@'localhost';
+GRANT SELECT ON taxpayers.Taxpayer_Income_Summary TO 'tax_data_entry'@'localhost';
 SHOW GRANTS FOR 'tax_data_entry'@'localhost';
 SHOW GRANTS FOR 'tax_officer'@'localhost';
 SELECT * FROM Taxpayer_Income_Summary;
@@ -167,9 +167,9 @@ INSERT INTO Income_Record
 (income_id, taxpayer_id, income_source, amount, received_date, remarks, category_id, year_id)
 VALUES
 (1018, 104, 'Final Task Test', 40000.00,'2026-03-31', NULL, 5, 6);
-GRANT UPDATE ON girija.Income_Record TO 'tax_data_entry'@'localhost';
+GRANT UPDATE ON taxpayers.Income_Record TO 'tax_data_entry'@'localhost';
 UPDATE Income_Record SET amount = 45000 WHERE income_id = 1018;
-REVOKE UPDATE ON girija.Income_Record FROM 'tax_data_entry'@'localhost';
+REVOKE UPDATE ON taxpayers.Income_Record FROM 'tax_data_entry'@'localhost';
 SHOW GRANTS FOR 'tax_data_entry'@'localhost';
 START TRANSACTION;
 INSERT INTO Income_Record
@@ -201,8 +201,8 @@ INSERT INTO Income_Record
 VALUES
 (1020, 105, 'Part F Entry Test', 50000.00,
 '2026-03-31', NULL, 5, 6);
-GRANT UPDATE ON girija.Income_Record
+GRANT UPDATE ON taxpayers.Income_Record
 TO 'tax_data_entry'@'localhost';
 UPDATE Income_Record SET amount = 55000 WHERE income_id = 1020;
-REVOKE UPDATE ON girija.Income_Record FROM 'tax_data_entry'@'localhost';
+REVOKE UPDATE ON taxpayers.Income_Record FROM 'tax_data_entry'@'localhost';
 SHOW GRANTS FOR 'tax_data_entry'@'localhost';
